@@ -1,11 +1,12 @@
 package by.itacademy.userservice.service;
 
+import by.itacademy.userservice.service.api.IEmailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailService {
+public class EmailService implements IEmailService {
 
     private final JavaMailSender mailSender;
 

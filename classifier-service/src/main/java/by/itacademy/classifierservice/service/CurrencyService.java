@@ -4,6 +4,7 @@ import by.itacademy.classifierservice.dto.CurrencyCreateRequest;
 import by.itacademy.classifierservice.exception.CurrencyNotFoundException;
 import by.itacademy.classifierservice.model.Currency;
 import by.itacademy.classifierservice.repository.CurrencyRepository;
+import by.itacademy.classifierservice.service.api.ICurrencyService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CurrencyService {
+public class CurrencyService implements ICurrencyService {
 
     private final CurrencyRepository currencyRepository;
 

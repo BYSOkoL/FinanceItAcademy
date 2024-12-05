@@ -17,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Здесь мы делаем запрос в user-service для получения информации о пользователе
+
         String url = "http://localhost:8081/api/v1/users/" + username;
         UserResponse userResponse = restTemplate.getForObject(url, UserResponse.class);
 

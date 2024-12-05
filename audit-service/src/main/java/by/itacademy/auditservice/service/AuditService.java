@@ -4,6 +4,7 @@ import by.itacademy.auditservice.dto.AuditCreateRequest;
 import by.itacademy.auditservice.exception.AuditNotFoundException;
 import by.itacademy.auditservice.model.Audit;
 import by.itacademy.auditservice.repository.AuditRepository;
+import by.itacademy.auditservice.service.api.IAuditService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
-public class AuditService {
+public class AuditService implements IAuditService {
 
     private final AuditRepository auditRepository;
 

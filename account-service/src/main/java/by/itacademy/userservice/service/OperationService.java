@@ -5,6 +5,7 @@ import by.itacademy.userservice.exception.OperationNotFoundException;
 import by.itacademy.userservice.model.Account;
 import by.itacademy.userservice.model.Operation;
 import by.itacademy.userservice.repository.OperationRepository;
+import by.itacademy.userservice.service.api.IOperationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class OperationService {
+public class OperationService implements IOperationService {
 
     private final OperationRepository operationRepository;
     private final AccountService accountService;
@@ -65,7 +66,7 @@ public class OperationService {
         operationRepository.delete(operation);
     }
 
-    private Operation getOperationById(UUID operationId) {
+    public Operation getOperationById(UUID operationId) {
         return operationRepository.findById(operationId)
                 .orElseThrow(() -> new OperationNotFoundException("Operation not found with id: " + operationId));
     }

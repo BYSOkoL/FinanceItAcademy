@@ -4,6 +4,7 @@ import by.itacademy.userservice.dto.AccountCreateRequest;
 import by.itacademy.userservice.exception.AccountNotFoundException;
 import by.itacademy.userservice.model.Account;
 import by.itacademy.userservice.repository.AccountRepository;
+import by.itacademy.userservice.service.api.IAccountService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AccountService {
+public class AccountService implements IAccountService {
 
     private final AccountRepository accountRepository;
 

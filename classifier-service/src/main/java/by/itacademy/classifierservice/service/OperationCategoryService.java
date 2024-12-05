@@ -4,6 +4,7 @@ import by.itacademy.classifierservice.dto.OperationCategoryCreateRequest;
 import by.itacademy.classifierservice.exception.OperationCategoryNotFoundException;
 import by.itacademy.classifierservice.model.OperationCategory;
 import by.itacademy.classifierservice.repository.OperationCategoryRepository;
+import by.itacademy.classifierservice.service.api.IOperationCategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class OperationCategoryService {
+public class OperationCategoryService implements IOperationCategoryService {
 
     private final OperationCategoryRepository operationCategoryRepository;
 

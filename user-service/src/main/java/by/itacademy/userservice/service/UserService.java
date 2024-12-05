@@ -4,6 +4,7 @@ import by.itacademy.userservice.dto.UserCreateRequest;
 import by.itacademy.userservice.exception.UserNotFoundException;
 import by.itacademy.userservice.model.User;
 import by.itacademy.userservice.repository.UserRepository;
+import by.itacademy.userservice.service.api.IUserService;
 import by.itacademy.userservice.util.PasswordUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final PasswordUtil passwordUtil;
@@ -49,7 +50,7 @@ public class UserService {
         if (user.getVerificationCode() != null && user.getVerificationCode().equals(code) &&
                 user.getVerificationCodeExpiry() != null && user.getVerificationCodeExpiry() > System.currentTimeMillis()) {
             user.setStatus("ACTIVATED");
-            user.setVerificationCode(null); // Удаляем код после использования
+            user.setVerificationCode(null);
             user.setVerificationCodeExpiry(null);
             userRepository.save(user);
             return "User verified successfully";
