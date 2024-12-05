@@ -1,36 +1,61 @@
 package by.itacademy.userservice.controller;
 
-import by.itacademy.userservice.dto.UserDTO;
-import by.itacademy.userservice.entity.User;
+import by.itacademy.userservice.dto.*;
+import by.itacademy.userservice.model.User;
 import by.itacademy.userservice.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-
-//убрать api/v1 и прочую с nginx
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody UserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        user.setRole("USER");
-
-        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/admin/all")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    @PostMapping("/users")
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
+        User user = userService.createUser(userCreateRequest);
+        return ResponseEntity.status(201).body(new UserResponse(user));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(UserResponse.from(users));
+    }
+
+    @GetMapping("/users/{uuid}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable UUID uuid) {
+        User user = userService.getUserById(uuid);
+        return ResponseEntity.ok(new UserResponse(user));
+    }
+
+    @PutMapping("/users/{uuid}/dt_update/{dt_update}")
+    public ResponseEntity<UserResponse> updateUser(
+            @PathVariable UUID uuid,
+            @PathVariable long dt_update,
+            @Valid @RequestBody UserCreateRequest userCreateRequest) {
+        User user = userService.updateUser(uuid, dt_update, userCreateRequest);
+        return ResponseEntity.ok(new UserResponse(user));
+    }
+
+    @PostMapping("/cabinet/registration")
+    public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
+        User user = userService.createUser(userCreateRequest);
+        return ResponseEntity.status(201).body(new UserResponse(user));
+    }
+
+    @GetMapping("/cabinet/verification")
+    public ResponseEntity<String> verifyUser(@RequestParam String code, @RequestParam String mail) {
+        // Implement verification logic here
+        return ResponseEntity.ok("User verified successfully");
     }
 }
