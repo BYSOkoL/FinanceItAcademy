@@ -15,16 +15,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   mail:
-    host: smtp.example.com
+    host: smtp.mail.ru
     port: 587
-    username: your-email@example.com
-    password: your-email-password
+    username: @mail.ru
+    password:
+    from: @mail.ru
+    protocol: smtp
     properties:
-    mail:
-    smtp:
-    auth: true
-    starttls:
-    enable: true
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 jwt:
-  secret: mySecretKey
+  secret: ba0e7f4583a1a3d73fa06c31fd846dac0913f875fc3d538bdf1409b2f953f385
   expiration: 3600000

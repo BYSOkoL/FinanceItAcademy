@@ -16,5 +16,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  secret: mySecretKey
+  secret: ba0e7f4583a1a3d73fa06c31fd846dac0913f875fc3d538bdf1409b2f953f385
   expiration: 3600000

@@ -10,7 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - microservices-network
+      - finance-network
 
   user-service:
     build:
@@ -26,7 +26,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - microservices-network
+      - finance-network
 
   account-service:
     build:
@@ -42,7 +42,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - microservices-network
+      - finance-network
 
   classifier-service:
     build:
@@ -58,7 +58,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - microservices-network
+      - finance-network
 
   audit-service:
     build:
@@ -74,10 +74,10 @@ services:
     depends_on:
       - postgres
     networks:
-      - microservices-network
+      - finance-network
 
 networks:
-  microservices-network:
+  finance-network:
     driver: bridge
 
 volumes:
